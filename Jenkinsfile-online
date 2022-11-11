@@ -20,17 +20,16 @@ pipeline {
     }
 
     stages {
+    
+        stage ('ENV-detail') {
+            steps {
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            }
+        }
+        
         stage ('checkout scm') {
             steps {
                 checkout(scm)
-            }
-        }
-
-        stage ('unit test') {
-            steps {
-                container ('maven') {
-                    sh 'mvn clean -o -gs `pwd`/configuration/settings.xml test'
-                }
             }
         }
 
